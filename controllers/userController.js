@@ -32,7 +32,7 @@ const login = async (req, res) => {
 };
 
 const getProfile = (req, res) => {
-   console.log("Authenticated user:", req.user);
+  console.log("Authenticated user:", req.user);
   res.status(200).json(req.user);
 };
 

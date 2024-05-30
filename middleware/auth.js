@@ -20,6 +20,7 @@ module.exports = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
+    console.error("Error in JWT authentication middleware:", error);
     res.status(401).json({ error: "Please authenticate" });
   }
 };
