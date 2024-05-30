@@ -1,17 +1,31 @@
 const { Model, DataTypes } = require("sequelize");
-const { sequelize } = require("../config/database"); // Ensure correct import
-const User = require("./user");
+const { sequelize } = require("../config/database");
+const User = require("./user"); // Import the User model
 
 class Notification extends Model {}
 
 Notification.init(
   {
-    userId: { type: DataTypes.INTEGER, references: { model: User, key: "id" } },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field:"user_id",
+      references: { model: User, key: "id" },
+    },
     message: { type: DataTypes.STRING, allowNull: false },
-    isRead: { type: DataTypes.BOOLEAN, defaultValue: false },
-    createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    isRead: { type: DataTypes.BOOLEAN, defaultValue: false,field:"is_read" },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      field: "createdat",
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      field: "updatedat",
+    },
   },
-  { sequelize, modelName: "notification" }
+  { sequelize, modelName: "notification", timestamps: false }
 );
 
 module.exports = Notification;

@@ -16,6 +16,10 @@ const placeBid = async (req, res) => {
     const { bidAmount } = req.body;
     const item = await Item.findByPk(itemId);
 
+    if (!item) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+
     if (item.currentPrice < bidAmount) {
       const bid = await Bid.create({ itemId, userId: req.user.id, bidAmount });
       await item.update({ currentPrice: bidAmount });
@@ -29,6 +33,7 @@ const placeBid = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 module.exports = {
   getAllBidsForItem,
   placeBid,
