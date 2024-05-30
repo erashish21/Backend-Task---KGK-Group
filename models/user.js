@@ -13,7 +13,7 @@ User.init(
   {
     sequelize,
     modelName: "user",
-    timestamps: true, // Enable timestamps (createdAt, updatedAt)
+    timestamps: true, 
   }
 );
 
